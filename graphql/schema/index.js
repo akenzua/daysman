@@ -262,6 +262,7 @@ module.exports = buildSchema(`
             createTitle(titleInput: TitleInput): Title
             createIssuer(issuerInput: IssuerInput): Issuer
             createSkill(skillInput: SkillInput): Skill
+            login(email: String!, password: String!): AuthData
         }
         schema {
             query: RootQuery
