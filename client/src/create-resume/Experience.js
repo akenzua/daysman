@@ -17,40 +17,80 @@ class Experience extends Component {
         this.removeExperience = this.removeExperience.bind(this);
 
         this.state = {
-            children: [],
-            position: "",
-            organisation: "",
-            start:"",
-            end:"",
-            job: [
-                {
-                    description: ""
-                }
-            ]
-        }
+           
+                experience: [
+                  
+                    
+                ],
+                
+                but: [{
+                    position: "",
+                    organisation: "",
+                    start:"",
+                    end:"",
+                    job: [
+                        {
+                            description: ""
+                        }
+        ]
+                }],
+        //             position: "",
+        //             organisation: "",
+        //             start:"",
+        //             end:"",
+                    job: [
+                        {
+                            description: ""
+                        }
+        ]
+            
+            
+            
     
       }
+    }
 
-
-      appendChild(){
+      appendChild(e,index){
+        
         this.setState({
-            children: [
-                ...this.state.children,
-                < ExperienceForm addJob={this.addJob} {...this.state} handleRemove={this.handleRemove} handleChange={this.handleChange}  removeExperience={this.removeExperience} />
+            experience: [
+                ...this.state.experience,
+                
+                < ExperienceForm addJob={this.addJob} sit={this.state.experience.length} {...this.state} handleRemove={this.handleRemove} handleChange={this.handleChange}  removeExperience={this.removeExperience}/>
             ]
         });
-        console.log(this.state.job)
+        console.log(this.state)
     }
     
     
     addJob(){
+        // console.log( this.state)
         
-        this.setState((state) =>({job: [...this.state.job, {description: ""}]}))
-        console.log(this.state.job)
+        // this.setState((state) =>({job: [...state.job, {description: ""}]}))
+
+        // this.setState((state) => ({
+        //     but: state.but.map(job => {
+        //         return job[0].job.push(this.state.job);
+        //     })
+        // }))
+        // this.setState((state) =>({but: [...state.but, 
+        //     job: [...job, {description: ""}]
+        
+        // ]}));
+        // this.setState({but: [...this.state.but, job:[{description:""}]
+    
+    // ]})
+        // let temp = but;
+        // this.state.but.job.push({description:""})
+        // this.setState({but:this.state.but.job.push({description:""})})
+        console.log(this.state)
+        console.log( this.state.but[0])
     }
 
     
     handleChange(e, index){
+
+        
         
         const job =this.state.job;
         job[index].description = e.target.value;
@@ -79,16 +119,18 @@ class Experience extends Component {
 
     }
 
-    removeExperience(index){
-        this.state.children.splice(index,1)
-        // console.log(this.state.job, "$$$$");
+    removeExperience(e,index){
+        delete this.state.experience[e];
 
-        this.setState((state) =>({children: state.children}))
+        // this.state.experience.splice(e,1)
+        console.log(this.state.experience);
+
+        this.setState((state) =>({experience: state.experience}))
     }
 
     handleSubmit(e){
         e.preventDefault();
-        // console.log(this.state, "$$$$");
+        console.log(this.state, "$$$$");
     }
 
     render() { 
@@ -99,24 +141,24 @@ class Experience extends Component {
                 
                 <FormGroup>
                 
-                <div className="box-container">
-                    {this.state.children.map((child, index )=>{
+                <div>
+                    {this.state.experience.map((child, index )=>{
                         
                         return(
                             <FormGroup key={index}>
-                               {child}
+                            {child }
                             </FormGroup>
                         )
                     } )}
                 </div>
             </FormGroup>
-                {/* < ExperienceForm addJob={this.addJob} {...this.state} handleRemove={this.handleRemove} handleChange={this.handleChange} /> */}
+                {/* < ExperienceForm addJob={this.addJob} {...this.state} handleRemove={this.handleRemove} handleChange={this.handleChange} removeExperience={this.removeExperience} /> */}
                 <FormGroup
                 display="flex"
                 justifyContent="space-between"
                 >   
                 <Button  variant="success" display="block" width="60%" type="button"  onClick={(e)=>this.handleSubmit(e)}>Save</Button>
-                <Button type="button" variant="info" width="30%" onClick={() => this.appendChild()}>Add Experience</Button>
+                <Button type="button" variant="info" width="30%" onClick={(e,index) => this.appendChild(e, index)}>Add Experience</Button>
                 </FormGroup>
                 
            

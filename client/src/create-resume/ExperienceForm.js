@@ -10,7 +10,7 @@ class ExperienceForm extends Component {
     //     super(props);
         
     // }
-  state = {  }
+    state = {  } 
     render() { 
         return ( 
             
@@ -20,13 +20,24 @@ class ExperienceForm extends Component {
                 borderRadius="5px"
                 dispaly="flex"
             >
-            <FontAwesomeIcon icon={faTimesCircle} onClick={ this.props.removeExperience }/>
+            <FontAwesomeIcon icon={faTimesCircle} onClick={(index) => this.props.removeExperience(this.props.sit, index) }
+            
+            />
         <FormGroup>
                     <Input control id="form-group-input-name" placeholder="Position"
                     size="sm"
                     display="block"
                     mt="10px"
                     />
+                </FormGroup>
+                <FormGroup>
+                    <Input control id="form-group-input-name" placeholder="Organization"
+                    size="sm"
+                    readOnly
+                    display="block"
+                    value={this.props.sit}
+                    />
+                
                 </FormGroup>
 
                 <FormGroup>
@@ -57,16 +68,16 @@ class ExperienceForm extends Component {
                     <Label>Job Description</Label>
                     <Button type="button"  variant="success" onClick={ this.props.addJob }><FontAwesomeIcon icon={faPlus} /></Button>
                     </FormGroup>
-                    {
-                        this.props.job.map((desc,index)=>{
-                          
+                    {/* {
+                        this.props.but.job.map((desc,index)=>{
+                            
                             return(
                                 
                                 <FormGroup key={index}
                                 display="flex"
                                 justifyContent="space-between"
                                 >
-                                    <Input onChange={(e)=> this.props.handleChange(e, index)}
+                                    <Input onChange={(e, index)=> this.props.handleChange(e, index)}
                                     name="description"
                                     value={desc.description}
                                     width="90%"
@@ -77,6 +88,27 @@ class ExperienceForm extends Component {
                                 
                             )
                         })
+                    } */}
+                    {
+                        this.props.but.map(obq=> obq.job.map((desc, index) => {
+                            // console.log(desc)
+                            return(
+                                
+                                <FormGroup key={index}
+                                display="flex"
+                                justifyContent="space-between"
+                                >
+                                    <Input onChange={(e, index)=> this.props.handleChange(e, index)}
+                                    name="description"
+                                    value={desc.description}
+                                    width="90%"
+                                    
+                                    />
+                                    <Button type="button"  onClick={()=>this.props.handleRemove(index)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
+                                </FormGroup>
+                                
+                            )
+                        }))
                     }
                     
                     

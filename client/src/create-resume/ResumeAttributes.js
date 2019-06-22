@@ -1,17 +1,58 @@
 import React, { Component } from 'react';
 import { FormGroup, Input, Textarea, Box } from '@smooth-ui/core-sc';
+import update from 'immutability-helper';
 
 
 
 export default class LoginForm extends Component {
-  state = { 
-      
-      
- };
+state = { }
 
+ handleClick(e){
+    const state2 = update(this.state, {
+        foo: foo =>
+          update(foo || [], {
+            0: fooZero =>
+              update(fooZero || {}, {
+                bar: bar => update(bar || [], { $push: ["x", "y", "z"] })
+              })
+          })
+          
+      }
+      
+      );
+
+  this.setState(state2)
+      
+     
+ }
  
 
   render() {
+    var state = {}
+    var desiredState = {
+      foo: [
+        {
+          bar: ['x', 'y', 'z']
+        },
+      ],
+    };
+    console.log(this.state)
+  
+    
+    // const state2 = update(state, {
+    //   foo: foo =>
+    //     update(foo || [], {
+    //       2: fooZero =>
+    //         update(fooZero || {}, {
+    //           bar: bar => update(bar || [], { $push: ["x", "y", "z"] })
+    //         })
+    //     })
+    // });
+
+    // console.log(state2)
+    // console.log(desiredState)
+
+    
     return (
       
         <form>
@@ -35,6 +76,7 @@ export default class LoginForm extends Component {
                 width="100%"
                  />
               </FormGroup>
+              <button type="button" onClick={(e)=>this.handleClick(e)}>Click</button>
               
             </Box>
 
