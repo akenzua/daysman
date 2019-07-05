@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import { FormGroup, Button } from '@smooth-ui/core-sc';
+import update from 'immutability-helper';
 
 import ExperienceForm from './ExperienceForm';
 
@@ -11,81 +12,121 @@ class Experience extends Component {
         super();
         this.addJob = this.addJob.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.otherChange = this.otherChange.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.appendChild = this.appendChild.bind(this);
         this.removeExperience = this.removeExperience.bind(this);
 
-        this.state = {
-           
-                experience: [
-                  
-                    
-                ],
-                
-                but: [{
-                    position: "",
-                    organisation: "",
-                    start:"",
-                    end:"",
-                    job: [
-                        {
-                            description: ""
-                        }
-        ]
-                }],
-        //             position: "",
-        //             organisation: "",
-        //             start:"",
-        //             end:"",
-                    job: [
-                        {
-                            description: ""
-                        }
-        ]
-            
-            
-            
-    
-      }
+     
     }
-
-      appendChild(e,index){
+    state = {
+           
+        experience: [
+          
+            // < ExperienceForm addJob={this.addJob} sit={0} {...this.state} handleRemove={this.handleRemove} handleChange={this.handleChange}  removeExperience={this.removeExperience}/>
+        ],
         
+        but: [
+            {position: "",
+            organisation: "",
+            start: "",
+            end: "",
+            job:  [
+                {
+                   description: "first"
+                 },
+                 {
+                    description: "second"
+                  }
+              ]}
+        ]
+
+}
+
+   
+    
+      appendChild = (e,index, l) => {
+        
+        
+     
+       let k = this.state.experience.length;
+       this.setState((prevState, props) => update(prevState, {
+            
+            but: {
+              [k]:{ 
+                $set: {
+                  position: "",
+                  organisation: "",
+                  start: "",
+                  end: "",
+                  job:  [
+                      {
+                         description: "third"
+                       },
+                       {
+                        description: "fourth"
+                      },
+                      {
+                        description: ""
+                      }
+                    ]
+                  
+                }
+      
+              }
+            }
+          }))
+
         this.setState({
+            
             experience: [
                 ...this.state.experience,
                 
-                < ExperienceForm addJob={this.addJob} sit={this.state.experience.length} {...this.state} handleRemove={this.handleRemove} handleChange={this.handleChange}  removeExperience={this.removeExperience}/>
+                < ExperienceForm addJob={this.addJob} sit={this.state.experience.length} {...this.state} handleRemove={this.handleRemove} handleChange={this.handleChange} otherChange={this.otherChange}  removeExperience={this.removeExperience}/>,
+                
             ]
+            
+            
         });
+        
+      
+        
         console.log(this.state)
+        
+        console.log(e)
     }
     
     
-    addJob(){
-        // console.log( this.state)
-        
-        // this.setState((state) =>({job: [...state.job, {description: ""}]}))
+    addJob = (number) =>{
+           this.setState((prevState, props) => update(prevState, {
+            but: {
+              [number]: { 
+                job: {$push: [
+                  {
+                    description: ""
+                  }
+                ]}
+              }
+            },
+         
+          }))
+          this.forceUpdate();
+        console.log(number)
+         console.log( this.state)
+         
+         
+    }
 
-        // this.setState((state) => ({
-        //     but: state.but.map(job => {
-        //         return job[0].job.push(this.state.job);
-        //     })
-        // }))
-        // this.setState((state) =>({but: [...state.but, 
-        //     job: [...job, {description: ""}]
+    otherChange = (e, i) => {
         
-        // ]}));
-        // this.setState({but: [...this.state.but, job:[{description:""}]
-    
-    // ]})
-        // let temp = but;
-        // this.state.but.job.push({description:""})
-        // this.setState({but:this.state.but.job.push({description:""})})
+        this.state.but[i][e.target.name] = e.target.value;
+        this.setState({
+            
+        but: this.state.but
+        })
         console.log(this.state)
-        console.log( this.state.but[0])
-    }
+    };
 
     
     handleChange(e, index){

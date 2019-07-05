@@ -5,21 +5,80 @@ import update from 'immutability-helper';
 
 
 export default class LoginForm extends Component {
-state = { }
+  state = {
+           
+    experience: [
+      
+        
+    ],
+    
+    but: [{
+        position: "",
+        organisation: "",
+        start:"",
+        end:"",
+        job: [
+            {
+                description: ""
+            }
+]
+    }]
+
+}
 
  handleClick(e){
-    const state2 = update(this.state, {
-        foo: foo =>
-          update(foo || [], {
-            0: fooZero =>
-              update(fooZero || {}, {
-                bar: bar => update(bar || [], { $push: ["x", "y", "z"] })
-              })
-          })
+    // const state2 = update(this.state, {
+    //     foo: foo =>
+    //       update(foo || [], {
+    //         0: fooZero =>
+    //           update(fooZero || {}, {
+    //             bar: bar => update(bar || [], { $push: ["x", "y", "z"] })
+    //           })
+    //       })
           
-      }
+    //   }
       
-      );
+    //   );
+
+    // const state2 = update(this.state, {
+    //   but: {
+    //     0: { 
+    //       job: {$push: [
+    //         {
+    //           description: ""
+    //         }
+    //       ]}
+    //     }
+    //   }
+    // })
+    // const state2 = update(this.state, {
+    //   but: but => 
+    //    update(but || {}, {
+    //      1: butOne =>
+    //      update(butOne || {}, {
+           
+    //      })
+    //    })
+    // })
+    const state2 = update(this.state, {
+      but: {
+        1:{ 
+          $set: {
+            position: "",
+            organisation: "",
+            start: "",
+            end: "",
+            job:  [
+                {
+                   description: ""
+                 }
+              ]
+            
+          }
+
+        }
+      }
+    })
 
   this.setState(state2)
       
