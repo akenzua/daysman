@@ -1,5 +1,6 @@
 import React, { Component, Fragment} from 'react';
-import { Router } from '@reach/router';
+// import { Router } from '@reach/router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Normalize, Col, Grid, Row } from '@smooth-ui/core-sc';
 
 
@@ -9,6 +10,7 @@ import Resumes from './Resumes';
 import CreateResume from './create-resume/CreateResumes';
 import ResumeAttribute from './create-resume/ResumeAttributes';
 import Experience from './create-resume/Experience';
+
 
 class App extends Component {
   state = { }
@@ -22,13 +24,9 @@ class App extends Component {
            
             <Col lg={7}>
               <Router>
-            
-                <Post path="/" />
-                <Resumes path="resumes" />
-                <CreateResume path="create-resume" >
-                  <ResumeAttribute path="attributes"/>
-                  <Experience path="experience"/>
-                </CreateResume>
+                <Route exact path='/' component={Post}/>
+                <Route path='/create-resume' component={CreateResume}/>
+               
 
               </Router>
             
