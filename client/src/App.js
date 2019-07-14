@@ -8,8 +8,8 @@ import Logout from './logout';
 import Post from './Post';
 import Resumes from './Resumes';
 import CreateResume from './create-resume/CreateResumes';
-import ResumeAttribute from './create-resume/ResumeAttributes';
-import Experience from './create-resume/Experience';
+// import ResumeAttribute from './create-resume/ResumeAttributes';
+// import Experience from './create-resume/Experience';
 
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
               <Router>
                 <Route exact path='/' component={Post}/>
                 <Route path='/create-resume' component={CreateResume}/>
-               
+                <Route path='/resumes' component={Resumes}/>
 
               </Router>
             

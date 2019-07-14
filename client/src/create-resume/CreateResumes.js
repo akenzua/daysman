@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink, Route, Switch } from 'react-router-dom';
+import {  NavLink, Route, Switch } from 'react-router-dom';
 
 
 import ResumeAttributes from './ResumeAttributes';
