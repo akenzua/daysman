@@ -46,20 +46,7 @@ const ExperienceContextProvider = (props) => {
                 )
             })
         )
-        // setExperience([
-        //     ...experience, 
-        //     {
-        //         position: "",
-        //         organisation: "",
-        //         start: "",
-        //         end: "",
-        //         job: [
-        //             {description: ""},
-                  
-        //         ]
-        //     }
-        // ])
-        
+               
     };
 
     const addJob = (i) => {
@@ -75,7 +62,8 @@ const ExperienceContextProvider = (props) => {
     const removeExperience = (i) => {
         setExperience(
             produce(draft => {
-                delete draft[i];
+                // delete draft[i];
+                draft.splice(i,1)
             })
         )
     }
