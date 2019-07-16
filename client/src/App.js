@@ -22,7 +22,7 @@ class App extends Component {
         <Grid>
           <Row justifyContent={{ lg: 'center' }}>
            
-            <Col lg={7}>
+            <Col lg={6}>
               <Router>
                 <Route exact path='/' component={Post}/>
                 <Route path='/create-resume' component={CreateResume}/>
