@@ -1,10 +1,12 @@
 import React, { useContext, Fragment } from 'react';
 import { FormGroup,Label, Button} from '@smooth-ui/core-sc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faPlus, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faPlus, faTimesCircle, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import {  NavLink} from 'react-router-dom';
 
-import { ExperienceContext } from './context/ExperienceContext'
-import { FormBox, FormInput} from './resume-form-theme/theme'
+
+import { ExperienceContext } from '../context/ExperienceContext'
+import { FormBox, FormInput} from '../resume-form-theme/theme'
 
 const Experience = () => {
 
@@ -52,10 +54,14 @@ const Experience = () => {
                 )
             })
             }
-            
-            <FormGroup display="flex" justifyContent="space-between" mt="20px">   
-                <Button  variant="success" display="block" width="60%" type="button"  >Save</Button>
-                <Button type="button" variant="info" width="30%" onClick={() => addExperience()}>Add Experience</Button>
+            <FormGroup display="flex" justifyContent="space-between" mt="20px" >
+                <FormGroup display="flex" justifyContent="flex-start" mt="20px" width="80%">
+                    <FontAwesomeIcon size="lg" cursor="pointer" icon={faPlus} onClick={() => addExperience()} />
+                </FormGroup> 
+                <FormGroup display="flex" justifyContent="space-between" mt="20px" width="20%" size="lg">
+                    <NavLink to="/create-resume/attributes"><FontAwesomeIcon size="lg" icon={faAngleLeft} /></NavLink>    
+                    <NavLink to="/create-resume/address"><FontAwesomeIcon size="lg" icon={faAngleRight} /></NavLink> 
+                </FormGroup>
             </FormGroup>
             
         </Fragment>

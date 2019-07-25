@@ -80,8 +80,9 @@ const ExperienceContextProvider = (props) => {
     }
 
     const handleChange = (e, i, k) => {
-        const value = e.target.value
-        const name = e.target.name
+       
+        const { value, name } = e.target;
+
         if (k !== undefined) {
         setExperience(
             produce(draft => {
@@ -90,7 +91,7 @@ const ExperienceContextProvider = (props) => {
             
         )
         } else{
-            // [e.target.name]=e.target.value;
+           
             
             console.log([e.target.name])
             setExperience(
@@ -103,8 +104,7 @@ const ExperienceContextProvider = (props) => {
         }
          
         console.log(experience)
-        // const job =this.state.job;
-        // job[index].description = e.target.value;
+        
     }
 
     return (

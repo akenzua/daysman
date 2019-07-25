@@ -252,7 +252,18 @@ module.exports = buildSchema(`
             login(email: String!, password: String!): AuthData
         }
         type RootMutation {
-            createResume(resumeInput: ResumeInput): Resume
+            createResume(
+                title: String!
+            summary: String!
+            experience: [ExperienceInput!]!
+            address: [AddressInput!]!
+            phone: [PhoneInput!]!
+            socials: [SocialInput!]
+            awards: [AwardsInput!]
+            education: [EducationInput!]!
+            certification: [CertificationInput!]
+            interest: [InterestInput!]
+            ): Resume
             createUser(userInput: UserInput): User
             createInstitution(institutionInput: InstitutionInput): Institution
             createFaculty(facultyInput: FacultyInput): Faculty

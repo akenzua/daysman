@@ -5,6 +5,7 @@ import {ApolloClient} from 'apollo-client';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {HttpLink} from 'apollo-link-http';
 import { Query, ApolloProvider} from 'react-apollo';
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 import gql from 'graphql-tag';
 
 
@@ -42,9 +43,11 @@ const client = new ApolloClient({
 
   ReactDOM.render(
     <ApolloProvider client={client}>
-      <Query query={IS_LOGGED_IN}>
-        {({ data }) => (data.isLoggedIn ? <App /> : <Login />)}
-      </Query>
+      <ApolloHooksProvider client={client}>
+        <Query query={IS_LOGGED_IN}>
+          {({ data }) => (data.isLoggedIn ? <App /> : <Login />)}
+        </Query>
+      </ApolloHooksProvider>
     </ApolloProvider>,
     document.getElementById('root'),
   );

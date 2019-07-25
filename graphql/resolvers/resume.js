@@ -34,22 +34,24 @@ module.exports = {
        
     },
     createResume: async (args, req) => {
-        // if(!req.isAuth){
-        //     throw new Error('Unauthenticated!');
-        // }
+        // const authHeader = req.get('authorization')
+        // console.log(authHeader)
+        if(!req.isAuth){
+            throw new Error('Unauthenticated!');
+        }
 
             
             const resume = new Resume({
-            title: args.resumeInput.title,
-            summary: args.resumeInput.summary,
-            experience: args.resumeInput.experience.map(({position, organisation, start, end, job }) => ({position, organisation, start, end, job})),
-            address: args.resumeInput.address.map(({house, street, town, city, country}) => ({house, street, town, city, country})),
-            phone: args.resumeInput.phone.map(({number}) => ({number})),
-            socials: args.resumeInput.socials.map(({site, account}) => ({site, account})),
-            awards: args.resumeInput.awards.map(({title, issuer, start, expires, description}) => ({title, issuer, start, expires, description})),
-            education: args.resumeInput.education.map(({institution, faculty, course, qualification, level}) => ({institution, faculty, course, qualification, level})),
-            certification: args.resumeInput.certification.map(({title, issuer, start, expires, expiry, description}) => ({title, issuer, start, expires, expiry, description})),
-            interest: args.resumeInput.interest.map(({skill}) => ({skill})),
+            title: args.title,
+            summary: args.summary,
+            experience: args.experience.map(({position, organisation, start, end, job }) => ({position, organisation, start, end, job})),
+            address: args.address.map(({house, street, town, city, country}) => ({house, street, town, city, country})),
+            phone: args.phone.map(({number}) => ({number})),
+            socials: args.socials.map(({site, account}) => ({site, account})),
+            awards: args.awards.map(({title, issuer, start, expires, description}) => ({title, issuer, start, expires, description})),
+            education: args.education.map(({institution, faculty, course, qualification, level}) => ({institution, faculty, course, qualification, level})),
+            certification: args.certification.map(({title, issuer, start, expires, expiry, description}) => ({title, issuer, start, expires, expiry, description})),
+            interest: args.interest.map(({skill}) => ({skill})),
             creator: req.userId  
         });
         let createdResume;
