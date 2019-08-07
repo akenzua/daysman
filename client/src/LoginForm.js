@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import {TextField, Button} from '@material-ui/core';
+
 
 export default class LoginForm extends Component {
   state = { 
@@ -22,24 +24,44 @@ export default class LoginForm extends Component {
     return (
       
         <form onSubmit={this.onSubmit}>
-          <input
-            required
-            type="email"
-            name="email"
-            placeholder="Email"
-            id="email"
-            onChange={this.onChange}
-          />
+        <TextField
+        id="email"
+        label="Email"
+        // className={classes.textField}
+        type="email"
+        name="email"
+        autoComplete="email"
+        margin="normal"
+        fullWidth 
+        // variant="outlined"
+        onChange={this.onChange}
+      />
+      
+      <TextField
+        id="password"
+        label="Password"
+        // className={classes.textField}
+        name="password"
+        type="password"
+        autoComplete="current-password"
+        margin="normal"
+        fullWidth 
+        // variant="outlined"
+        onChange={this.onChange}
+      />  
+          
 
-            <input
+            {/* <input
             required
             type="password"
             name="password"
             placeholder="Password"
             id="password"
             onChange={this.onChange}
-          />
-          <button type="submit">Log in</button>
+          /> */}
+          <Button variant="contained" color="primary" fullWidth type="submit">
+        Log In
+      </Button>
         </form>
      
     );

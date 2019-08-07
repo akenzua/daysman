@@ -1,42 +1,58 @@
 import React, { useContext, Fragment } from 'react';
-import { FormGroup} from '@smooth-ui/core-sc';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faAngleRight, faAngleLeft, faPlus, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import {  NavLink} from 'react-router-dom';
+import {Box, TextField, Button, Fab} from '@material-ui/core';
+import {ArrowForward, Add, ArrowBack, Clear} from '@material-ui/icons';
 
 import { SocialContext } from '../context/SocialContext'
-import { FormBox, FormInput} from '../resume-form-theme/theme'
+import { useStyles} from '../resume-form-theme/theme'
 
 const Social = () => {
+
+    const classes = useStyles();
 
     const { socials, addSocial, handleChange, removeSocial} = useContext(SocialContext)
     return ( 
         <Fragment>
             {socials.map(({site, account}, i) => {
               return (
-                <FormBox key={i}>
-                    <FontAwesomeIcon icon={faTimesCircle} onClick={() => removeSocial(i)} />
-                    <FormGroup>
-                      <FormInput  placeholder="Platform" value={site} onChange ={ (e) => handleChange(e, i)} name='site' />
-                    </FormGroup>
-                    
-                    <FormGroup>
-                      <FormInput  placeholder="Link" value={account} onChange ={ (e) => handleChange(e, i)} name='account' />
-                    </FormGroup>
-                    
-                </FormBox>
+                <Box key={i} className={classes.box}>
+                  <Box className={classes.justifySpace}>
+                    <TextField id="site" label="Platform" type="text" name="site" autoComplete="platform" margin="normal" style = {{width: "35%"}} value={site} onChange ={ (e) => handleChange(e, i)}/>
+                    <TextField id="account" label="Link" type="text" name="account" autoComplete="account" margin="normal" style = {{width: "60%"}} value={account} onChange ={ (e) => handleChange(e, i)}/>
+                  </Box>  
+
+                  <Box  className={classes.justifyEnd} marginTop="10px">   
+                    <Fab onClick={() => removeSocial(i)}>
+                         <Clear  />
+                         </Fab>
+                  </Box> 
+                  
+                </Box>
               )
             }
             )} 
-            <FormGroup display="flex" justifyContent="space-between" mt="20px" >
-                <FormGroup display="flex" justifyContent="flex-start" mt="20px" width="80%">
-                        <FontAwesomeIcon size="lg" cursor="pointer" icon={faPlus} onClick={() => addSocial()} />
-                </FormGroup> 
-                <FormGroup display="flex" justifyContent="space-between" mt="20px" width="20%" size="lg">
-                        <NavLink to="/create-resume/phone"><FontAwesomeIcon size="lg" icon={faAngleLeft} /></NavLink>    
-                        <NavLink to="/create-resume/education"><FontAwesomeIcon size="lg" icon={faAngleRight} /></NavLink> 
-                </FormGroup>   
-            </FormGroup>       
+            <Box display="flex" justifyContent="space-between" mt="20px" size="lg"   className={classes.action}>  
+
+              <NavLink to="/create-resume/phone" className={classes.link}>
+                  <Button variant="contained"  color="secondary" className={classes.button}>
+                  <ArrowBack  />
+                  &nbsp;&nbsp;&nbsp;
+                  Back
+                  </Button>
+              </NavLink>
+
+              <Button variant="contained"  color="secondary" className={classes.button} onClick={() => addSocial()} >
+              Add Socials &nbsp;&nbsp;&nbsp;
+                  <Add  />
+              </Button>
+
+              <NavLink to="/create-resume/education" className={classes.link}>
+                  <Button variant="contained"  color="secondary" className={classes.button}>
+                  Save &amp; Next &nbsp;&nbsp;&nbsp;
+                  <ArrowForward  />
+                  </Button>
+              </NavLink>
+            </Box>       
         </Fragment>
      );
 }

@@ -1,45 +1,62 @@
-import React, { Component, Fragment} from 'react';
-// import { Router } from '@reach/router';
+import React, {  Fragment} from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Normalize, Col, Grid, Row } from '@smooth-ui/core-sc';
+import { AppBar, Toolbar, Typography, makeStyles, Grid} from '@material-ui/core';
+
 
 
 import Logout from './logout';
 import Post from './Post';
 import Resumes from './Resumes';
 import CreateResume from './create-resume/CreateResumes';
-// import ResumeAttribute from './create-resume/ResumeAttributes';
-// import Experience from './create-resume/Experience';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
-class App extends Component {
-  state = { }
-  render() { 
+const App = () => {
+  
+  const classes = useStyles();
+  
+ 
+    
     return ( 
       <Fragment>
-        <Normalize />
-        < Logout/>
-        <Grid>
-          <Row justifyContent={{ lg: 'center' }}>
-           
-            <Col lg={6}>
+            <div className={classes.root}>
+                <AppBar position="static">
+                  <Toolbar>
+                    <Typography variant="h6" className={classes.title}>
+                      daysman
+                    </Typography>
+                    < Logout/>
+                  </Toolbar>
+                </AppBar>
+              </div>
               <Router>
-                <Route exact path='/' component={Post}/>
-                <Route path='/create-resume' component={CreateResume}/>
-                <Route path='/resumes' component={Resumes}/>
-
+                <Grid container>
+                  <Grid item sm={3}></Grid>
+                  <Grid item sm={6}>
+                    
+                    <Route exact path='/' component={Post}/>
+                    <Route path='/create-resume' component={CreateResume}/>
+                    <Route path='/resumes' component={Resumes}/>
+                    
+                  </Grid>
+                  <Grid item sm={3}></Grid>
+                  
+                </Grid>
               </Router>
-            
-            </Col>
-            
-          </Row>
-          
-        </Grid>
-        
         
       </Fragment>
      );
-  }
+  
 }
  
 export default App;

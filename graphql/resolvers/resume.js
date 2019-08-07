@@ -49,7 +49,7 @@ module.exports = {
             phone: args.phone.map(({number}) => ({number})),
             socials: args.socials.map(({site, account}) => ({site, account})),
             awards: args.awards.map(({title, issuer, start, expires, description}) => ({title, issuer, start, expires, description})),
-            education: args.education.map(({institution, faculty, course, qualification, level}) => ({institution, faculty, course, qualification, level})),
+            education: args.education.map(({institution, faculty, course, qualification, level, start, end}) => ({institution, faculty, course, qualification, level, start, end})),
             certification: args.certification.map(({title, issuer, start, expires, expiry, description}) => ({title, issuer, start, expires, expiry, description})),
             interest: args.interest.map(({skill}) => ({skill})),
             creator: req.userId  

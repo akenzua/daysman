@@ -1,36 +1,53 @@
 import React, { useContext, Fragment } from 'react';
-import { FormGroup, Textarea} from '@smooth-ui/core-sc';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import {  NavLink} from 'react-router-dom';
+import {Box, TextField, Button} from '@material-ui/core';
+import ArrowForward from '@material-ui/icons/ArrowForward';
 
 import { AttributesContext } from '../context/AttributesContext'
-import { FormBox, FormInput} from '../resume-form-theme/theme'
+import { useStyles} from '../resume-form-theme/theme'
 
 const ResumeAttributes = () => {
+
+    const classes = useStyles();
 
     const { attributes, handleChange} = useContext(AttributesContext)
     return ( 
         <Fragment>
             {attributes.map(({title, summary}, i) => {
               return (
-                <FormBox key={i}>
-                  
-                    <FormGroup>
-                      <FormInput  placeholder="Title" value={title} onChange ={ (e) => handleChange(e, i)} name='title' />
-                    </FormGroup>
-                    <FormGroup>
-                      <Textarea size="lg" placeholder="Summary" display="block" value={summary} width="100%" onChange ={ (e) => handleChange(e, i)} name="summary"/>
-                    </FormGroup>
-                </FormBox>
+                <Box key={i} className={classes.box}>
+
+                    <TextField id="title" label="Title" type="text" name="title" autoComplete="title" margin="normal" fullWidth value={title} onChange ={ (e) => handleChange(e, i)}/>
+
+                    <TextField
+                      id="summary"
+                      label="Summary"
+                      multiline
+                      fullWidth
+                      rows="5"
+                      value={summary}
+                      onChange ={ (e) => handleChange(e, i)}
+                      className={classes.textField}
+                      margin="normal"
+                      name = "summary"
+                      autoComplete="summary"
+                    />
+
+                   
+                    
+                </Box>
               )
             }
             )} 
-
-            <FormGroup display="flex" justifyContent="flex-end" mt="20px" size="lg">   
-            <NavLink to="/create-resume/experience"><FontAwesomeIcon size="lg" icon={faAngleRight} /></NavLink>
-                
-            </FormGroup>           
+            <Box className={classes.justifyEnd} mt="40px" mr="70px" size="lg">   
+                      <NavLink to="/create-resume/experience" className={classes.link}>
+                        <Button variant="contained"  color="secondary" className={classes.button}>
+                          Save &amp; Next &nbsp;&nbsp;&nbsp;
+                          <ArrowForward  />
+                        </Button>
+                      </NavLink>
+                    </Box> 
+                       
         </Fragment>
      );
 }

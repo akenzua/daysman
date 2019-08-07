@@ -1,6 +1,5 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import gqlast from '../../gqlast';
 import { useMutation } from 'react-apollo-hooks';
 
 // const CREATE_RESUME = gql`
@@ -54,14 +53,11 @@ const Summary = () => {
     const socials = JSON.parse(localStorage.getItem('socials'))
     const interest = JSON.parse(localStorage.getItem('interest'))
     const awards = JSON.parse(localStorage.getItem('awards'))
-    let title = "";
-    let summary = "";
-    attributes.map(attribute =>{
-        title = attribute.title
-        summary = attribute.summary
-    })
+    let title =attributes[0].title;
+    let summary = attributes[0].summary;
+    
 
-    const [addResume, { loading, error }] = useMutation(CREATE_RESUME, {
+    const [addResume] = useMutation(CREATE_RESUME, {
         variables: { title, summary, experience, education, certification, address, phone, socials, awards, interest },
       });
     console.log(attributes)

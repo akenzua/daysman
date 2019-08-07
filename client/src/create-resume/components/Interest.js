@@ -1,39 +1,55 @@
 import React, { useContext, Fragment } from 'react';
-import { FormGroup} from '@smooth-ui/core-sc';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faAngleRight, faAngleLeft, faPlus, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import {  NavLink} from 'react-router-dom';
+import {Box, TextField, Button, Fab} from '@material-ui/core';
+import {ArrowForward, Add, ArrowBack, Clear} from '@material-ui/icons';
+
 
 import {InterestContext } from '../context/InterestContext'
-import { FormBox, FormInput} from '../resume-form-theme/theme'
+import { useStyles} from '../resume-form-theme/theme'
 
 const Interest = () => {
+    const classes = useStyles();
 
     const { interest, addInterest, handleChange, removeInterest} = useContext(InterestContext)
     return ( 
         <Fragment>
             {interest.map(({skill}, i) => {
               return (
-                <FormBox key={i}>
-                    <FontAwesomeIcon icon={faTimesCircle} onClick={() => removeInterest(i)} />
-                    <FormGroup>
-                      <FormInput  placeholder="Interest" value={skill} onChange ={ (e) => handleChange(e, i)} name='skill' />
-                    </FormGroup>
+                <Box key={i} className={classes.box}>
                     
-                </FormBox>
+                    <TextField id="skill" label="Interest" type="text" name="skill" autoComplete="skill" margin="normal" fullWidth value={skill} onChange ={ (e) => handleChange(e, i)}/>
+                    <Box  className={classes.justifyEnd} marginTop="10px">   
+                      <Fab onClick={() => removeInterest(i)}>
+                          <Clear  />
+                          </Fab>
+                    </Box>
+                </Box>
               )
             }
             )} 
-            <FormGroup display="flex" justifyContent="space-between" mt="20px" >
-                <FormGroup display="flex" justifyContent="flex-start" mt="20px" width="80%">
-                        <FontAwesomeIcon size="lg" cursor="pointer" icon={faPlus} onClick={() => addInterest()} />
-                </FormGroup> 
-                <FormGroup display="flex" justifyContent="space-between" mt="20px" width="20%" size="lg">
-                        <NavLink to="/create-resume/certification"><FontAwesomeIcon size="lg" icon={faAngleLeft} /></NavLink>    
-                        
-                </FormGroup>   
-            </FormGroup>       
-        </Fragment>
+            <Box display="flex" justifyContent="space-between" mt="20px" size="lg"   className={classes.action}>  
+
+              <NavLink to="/create-resume/certification" className={classes.link}>
+                  <Button variant="contained"  color="secondary" className={classes.button}>
+                  <ArrowBack  />
+                  &nbsp;&nbsp;&nbsp;
+                  Back
+                  </Button>
+              </NavLink>
+
+              <Button variant="contained"  color="secondary" className={classes.button} onClick={() => addInterest()} >
+              Add Interest &nbsp;&nbsp;&nbsp;
+                  <Add  />
+              </Button>
+
+              <NavLink to="/create-resume/awards" className={classes.link}>
+                  <Button variant="contained"  color="secondary" className={classes.button}>
+                  Save &amp; Next &nbsp;&nbsp;&nbsp;
+                  <ArrowForward  />
+                  </Button>
+              </NavLink>
+            </Box>
+      </Fragment>
      );
 }
  

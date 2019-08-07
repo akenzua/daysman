@@ -59,6 +59,8 @@ module.exports = buildSchema(`
             course: Course!
             qualification: Qualification!
             level: Level!
+            start: String
+            end: String
         }
 
         type Title {

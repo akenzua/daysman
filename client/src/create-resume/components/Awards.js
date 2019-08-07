@@ -1,62 +1,102 @@
 import React, { useContext, Fragment } from 'react';
-import { FormGroup,Label, Button} from '@smooth-ui/core-sc';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faPlus, faTimesCircle, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+
 import {  NavLink} from 'react-router-dom';
+import {Box, TextField, Button, Fab,Radio, FormLabel, FormControlLabel, RadioGroup, FormControl} from '@material-ui/core';
+import {ArrowForward, Add, ArrowBack, Clear} from '@material-ui/icons';
+
 
 
 import { AwardsContext } from '../context/AwardsContext'
-import { FormBox, FormInput} from '../resume-form-theme/theme'
+import { useStyles} from '../resume-form-theme/theme'
+
 
 const Awards = () => {
-    
+    const classes = useStyles(); 
 
     const { awards, addAwards,  removeAwards,  handleChange } = useContext(AwardsContext)
     return ( 
         <Fragment>
             {awards.map(({title, issuer, expires, start, description}, i) =>{
                 return(
-                    <FormBox  key={i}>
-                        <FontAwesomeIcon icon={faTimesCircle} onClick={() => removeAwards(i)} />
+                    <Box  key={i} className={classes.box}>
+                        <TextField id="title" label="Title" type="text" name="title" autoComplete="title" margin="normal" fullWidth value={title} onChange ={ (e) => handleChange(e, i)}/>
+                        <TextField id="issuer" label="Issuer" type="text" name="issuer" autoComplete="issuer" margin="normal" fullWidth value={issuer} onChange ={ (e) => handleChange(e, i)}/>
+                        <TextField id="description" label="Description" type="text" name="description" autoComplete="description" margin="normal" fullWidth value={description} onChange ={ (e) => handleChange(e, i)}/>
+                        <Box className={classes.duration}>
+                        <FormControl component="fieldset"  variant="outlined">
+                            <FormLabel component="legend">Require Renewal?</FormLabel>
+                            <RadioGroup aria-label="expires" name="expires" 
+                            value={expires}
                             
-                        <FormGroup>
-                            <FormInput  placeholder="Title" value={title} onChange ={ (e) => handleChange(e, i)} name='title' />
-                        </FormGroup>
+                            onChange ={ (e) => handleChange(e, i)} 
+                            row>
+                                <FormControlLabel
+                                value="true"
+                                control={<Radio color="primary" />}
+                                label="Yes"
+                                labelPlacement="start"
+                                />
+                                <FormControlLabel
+                                value="false"
+                                control={<Radio color="primary" />}
+                                label="No"
+                                labelPlacement="start"
+                                />
+                                
+                            </RadioGroup>
+                            </FormControl>
 
-                        <FormGroup>
-                            <FormInput  value={issuer} placeholder="Issuer" onChange ={ (e) => handleChange(e, i)} name='issuer' />
-                        </FormGroup>
 
-                      
-                        <FormGroup>
-                            <FormInput  value={expires} placeholder="Expires"  onChange ={ (e) => handleChange(e, i)}  name='expires' />
-                        </FormGroup> 
-                        <FormGroup>
-                            <FormInput  value={description} placeholder="Description"  onChange ={ (e) => handleChange(e, i)}  name='description' />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label htmlFor="form-group-input-name">Start Date</Label>
-                            <FormInput  value={start} placeholder="Start " type="date" onChange ={ (e) => handleChange(e, i)} name='start' />
-                        </FormGroup>
+                            <TextField
+                                    id="start"
+                                    label="Start Date"
+                                    type="date"
+                                    className={classes.textField}
+                                    value={start}
+                                    onChange ={ (e) => handleChange(e, i)}
+                                    name="start"
+                                    InputLabelProps={{
+                                    shrink: true,
+                                    }}
+                                />
 
-                       
-                                       
+                            
+                        </Box>     
                         
-                  
-                    
-                    </FormBox>
+                        <Box  className={classes.justifyEnd} marginTop="10px">   
+                            
+                            <Fab onClick={() => removeAwards(i)}>
+                            <Clear  />
+                            </Fab>
+                             
+                        </Box> 
+                      
+                    </Box>
                 )
             })
             }
-            <FormGroup display="flex" justifyContent="space-between" mt="20px" >
-                <FormGroup display="flex" justifyContent="flex-start" mt="20px" width="80%">
-                    <FontAwesomeIcon size="lg" cursor="pointer" icon={faPlus} onClick={() => addAwards()} />
-                </FormGroup> 
-                <FormGroup display="flex" justifyContent="space-between" mt="20px" width="20%" size="lg">
-                    <NavLink to="/create-resume/socials"><FontAwesomeIcon size="lg" icon={faAngleLeft} /></NavLink>    
-                    <NavLink to="/create-resume/certification"><FontAwesomeIcon size="lg" icon={faAngleRight} /></NavLink> 
-                </FormGroup>
-            </FormGroup>
+            <Box display="flex" justifyContent="space-between" mt="20px" size="lg"   className={classes.action}>  
+
+                <NavLink to="/create-resume/interest" className={classes.link}>
+                    <Button variant="contained"  color="secondary" className={classes.button}>
+                    <ArrowBack  />
+                    &nbsp;&nbsp;&nbsp;
+                    Back
+                    </Button>
+                </NavLink>
+
+                <Button variant="contained"  color="secondary" className={classes.button} onClick={() => addAwards()} >
+                Add Award &nbsp;&nbsp;&nbsp;
+                    <Add  />
+                </Button>
+
+                <NavLink to="/create-resume/summary" className={classes.link}>
+                    <Button variant="contained"  color="secondary" className={classes.button}>
+                    Save &amp; Next &nbsp;&nbsp;&nbsp;
+                    <ArrowForward  />
+                    </Button>
+                </NavLink>
+            </Box>
             
         </Fragment>
      );

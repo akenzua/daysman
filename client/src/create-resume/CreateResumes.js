@@ -1,5 +1,7 @@
-import React from 'react';
-import {  NavLink, Route, Switch } from 'react-router-dom';
+import React, { Fragment} from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 
 import ResumeAttributes from './components/ResumeAttributes';
@@ -22,42 +24,31 @@ import Summary from './components/Summary';
 import AwardsContextProvider from './context/AwardsContext';
 import Awards from './components/Awards';
 
+
 const CreateResume = props => {
+
+  
+  
     return ( 
             <div>
               <h2>Create Resume</h2>
-              <ul>
-                <li>
-                  <NavLink to="/create-resume/attributes">Resume Attributes</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/experience">Work Experience</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/address">Address</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/phone">Phone</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/socials">Socials</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/education">Education</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/certification">Certification</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/interest">Interest</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/awards">Awards</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/create-resume/summary">Summary</NavLink>
-                </li>
-              </ul>
+              <Route
+                path="/create-resume"
+                render={({ location }) => (
+                  <Fragment >
+                    <Tabs value={location.pathname} orientation="vertical" variant="scrollable">
+                      <Tab label="Attributes" value="/create-resume/attributes" component={Link} to="/create-resume/attributes" />
+                      <Tab label="Experience" value="/create-resume/experience" component={Link} to="/create-resume/experience" />
+                      <Tab value="/create-resume/address" label="Address" component={Link} to="/create-resume/address"/>
+                      <Tab value="/create-resume/phone" label="Phone" component={Link} to="/create-resume/phone"/>
+                      <Tab value="/create-resume/socials" label="Socials" component={Link} to="/create-resume/socials"/>
+                      <Tab value="/create-resume/education" label="Education" component={Link} to="/create-resume/education"/>
+                      <Tab value="/create-resume/certification" label="Certification" component={Link} to="/create-resume/certification"/>
+                      <Tab value="/create-resume/interest" label="Interest" component={Link} to="/create-resume/interest"/>
+                      <Tab value="/create-resume/awards" label="Awards" component={Link} to="/create-resume/awards"/>
+                      <Tab value="/create-resume/summary" label="Summary" component={Link} to="/create-resume/summary"/>
+                  </Tabs>
+             
               <Switch>
                 <Route exact path='/create-resume/attributes'>
                   <AttributesContextProvider>
@@ -119,6 +110,10 @@ const CreateResume = props => {
                  </Route>
                  
               </Switch>
+              </Fragment>
+          )}
+        />
+              
             </div>
     );
     
