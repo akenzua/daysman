@@ -1,6 +1,6 @@
 const Resume = require('../../models/resume');
 const User = require('../../models/user');
-const { transformResume } = require('./merge');
+const { transformResume, resumeOne } = require('./merge');
 
 
 
@@ -22,8 +22,7 @@ module.exports = {
             return resumes 
             
             .map(resume => {
-                // return resume;
-                console.log(resume);
+                
                 return transformResume(resume);
             })
       
@@ -33,6 +32,26 @@ module.exports = {
         }
        
     },
+
+    // resumeOne: async (args) => {
+
+    //     try{
+    //         const resumeOne = await Resume.findById(args.id)
+    //      .populate('education.institution')
+    //      .populate('education.faculty')
+    //      .populate('education.course')
+    //      .populate('education.qualification')
+    //      .populate('education.level')
+    //      .populate('certification.title')
+    //      .populate('certification.issuer')
+    //      .populate('interest.skill')
+    //       return resumeOne
+
+    //     }catch (err){
+    //         throw err;
+    //     }
+        
+    // },
     createResume: async (args, req) => {
         // const authHeader = req.get('authorization')
         // console.log(authHeader)
@@ -40,7 +59,6 @@ module.exports = {
             throw new Error('Unauthenticated!');
         }
 
-            
             const resume = new Resume({
             title: args.title,
             summary: args.summary,
@@ -58,7 +76,7 @@ module.exports = {
         try{ 
         const result = await  resume
         .save()
-        
+        let id = resume.id
         createdResume = transformResume(result);
 
         const creator = await User.findById(req.userId)
@@ -69,8 +87,17 @@ module.exports = {
             creator.createdResumes.push(resume);
             await creator.save();
         
-       
-            return createdResume;
+            const theResume = await Resume.findById(id)
+            .populate('education.institution')
+            .populate('education.faculty')
+            .populate('education.course')
+            .populate('education.qualification')
+            .populate('education.level')
+            .populate('certification.title')
+            .populate('certification.issuer')
+            .populate('interest.skill')
+            // return resumes 
+            return theResume;
         } catch(err){
             console.log(err);
             throw err;

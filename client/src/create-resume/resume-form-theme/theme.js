@@ -35,7 +35,17 @@ export const useStyles = makeStyles({
       justifyContent: "space-between",
       paddingTop: "35px",
       paddingBottom: "35px"
+    },
+    paper: {
+      padding: "25px",
+      margin: "5px"
+    },
+    multiple: {
+      marginBottom: "13px",
+      borderBottom: "1px solid #e4e4e4",
+      paddingBottom: "10px"
     }
+    
   });
 
 export const FormBox = styled(Box)({

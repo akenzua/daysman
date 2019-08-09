@@ -78,7 +78,7 @@ module.exports = buildSchema(`
             title: Title
             issuer: Issuer
             start: String
-            expires: Boolean
+            expires: String
             expiry: String
             description: String
         }
@@ -204,6 +204,8 @@ module.exports = buildSchema(`
             course: String!
             qualification: String!
             level: String!
+            start: String
+            end: String
         }
 
         input IssuerInput {
@@ -218,7 +220,7 @@ module.exports = buildSchema(`
             title: String!
             issuer: String!
             start: String!
-            expires: Boolean!
+            expires: String!
             expiry: String
             description: String!
         }
@@ -252,6 +254,7 @@ module.exports = buildSchema(`
         type RootQuery {
             resumes: [Resume!]!
             login(email: String!, password: String!): AuthData
+            resume(id: ID!): Resume
         }
         type RootMutation {
             createResume(

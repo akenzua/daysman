@@ -60,6 +60,11 @@ const CertificationContextProvider = (props) => {
     const handleChange = (e, i) => {
        
         const { value, name } = e.target;
+            // if(value === "true"){
+            //     value = true
+            // }else if(value === "false"){
+            //     value = false
+            // }
         
             setCertification(
                 produce(draft => {

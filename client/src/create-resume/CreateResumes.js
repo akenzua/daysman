@@ -21,6 +21,7 @@ import CertificationContextProvider from './context/CertificationContext';
 import Interest from './components/Interest';
 import InterestContextProvider from './context/InterestContext';
 import Summary from './components/Summary';
+import SummaryContextProvider from './context/SummaryContext';
 import AwardsContextProvider from './context/AwardsContext';
 import Awards from './components/Awards';
 
@@ -105,8 +106,9 @@ const CreateResume = props => {
                 </Route>
 
                 <Route exact path='/create-resume/summary'>
-                 
+                  <SummaryContextProvider>
                     <Summary/>
+                  </SummaryContextProvider>
                  </Route>
                  
               </Switch>

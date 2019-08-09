@@ -7,7 +7,7 @@ export const SocialContext = createContext();
 const SocialContextProvider = (props) => {
     const [socials, setSocial] = useState(
      ()=> {
-        const localSocial = localStorage.getItem('social')
+        const localSocial = localStorage.getItem('socials')
         return localSocial ? JSON.parse(localSocial): 
         [
             {

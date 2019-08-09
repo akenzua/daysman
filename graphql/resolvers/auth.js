@@ -41,8 +41,8 @@ module.exports = {
             throw new Error('Invalid Credentials!');
         }
         const token = jwt.sign({userId: user.id, email: user.email}, 'createawesomeresume', {
-            expiresIn: '1h'
+            expiresIn: '72h'
         });
-        return { userId: user.id, token: token, tokenExpiration: 1};
+        return { userId: user.id, token: token, tokenExpiration: 72};
     }
 };

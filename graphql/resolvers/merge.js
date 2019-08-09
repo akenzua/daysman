@@ -1,6 +1,6 @@
 const Resume = require('../../models/resume');
 const User = require('../../models/user');
-const Institution = require('../../models/institution');
+// const Institution = require('../../models/institution');
 
 const transformResume = resume => {
     return {...resume._doc,
@@ -8,6 +8,26 @@ const transformResume = resume => {
         
         };
 }
+
+ const resumeOne = async (args) => {
+
+    try{
+        const resumeOne = await Resume.findById(args.id)
+     .populate('education.institution')
+     .populate('education.faculty')
+     .populate('education.course')
+     .populate('education.qualification')
+     .populate('education.level')
+     .populate('certification.title')
+     .populate('certification.issuer')
+     .populate('interest.skill')
+      return resumeOne
+
+    }catch (err){
+        throw err;
+    }
+    
+}  
 
 const resumes = async resumeIds => {
     try{

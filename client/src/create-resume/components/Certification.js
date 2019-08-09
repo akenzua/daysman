@@ -22,7 +22,7 @@ const Certification = () => {
                     <Box  key={i} className={classes.box}>
                         <TextField id="title" label="Title" type="text" name="title" autoComplete="title" margin="normal" fullWidth value={title} onChange ={ (e) => handleChange(e, i)}/>
                         <TextField id="issuer" label="Issuer" type="text" name="issuer" autoComplete="title" margin="normal" fullWidth value={issuer} onChange ={ (e) => handleChange(e, i)}/>
-                        <TextField id="description" label="Description" type="text" name="description" autoComplete="description" margin="normal" fullWidth value={issuer} onChange ={ (e) => handleChange(e, i)}/>
+                        <TextField id="description" label="Description" type="text" name="description" autoComplete="description" margin="normal" fullWidth value={description} onChange ={ (e) => handleChange(e, i)}/>
 
                         {/* <FontAwesomeIcon icon={faTimesCircle} onClick={() => removeCertification(i)} /> */}
                             
