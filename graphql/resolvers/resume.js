@@ -33,25 +33,25 @@ module.exports = {
        
     },
 
-    // resumeOne: async (args) => {
+    resume: async (args) => {
 
-    //     try{
-    //         const resumeOne = await Resume.findById(args.id)
-    //      .populate('education.institution')
-    //      .populate('education.faculty')
-    //      .populate('education.course')
-    //      .populate('education.qualification')
-    //      .populate('education.level')
-    //      .populate('certification.title')
-    //      .populate('certification.issuer')
-    //      .populate('interest.skill')
-    //       return resumeOne
+        try{
+            const resume = await Resume.findById(args.id)
+         .populate('education.institution')
+         .populate('education.faculty')
+         .populate('education.course')
+         .populate('education.qualification')
+         .populate('education.level')
+         .populate('certification.title')
+         .populate('certification.issuer')
+         .populate('interest.skill')
+            return transformResume(resume);
 
-    //     }catch (err){
-    //         throw err;
-    //     }
+        }catch (err){
+            throw err;
+        }
         
-    // },
+    },
     createResume: async (args, req) => {
         // const authHeader = req.get('authorization')
         // console.log(authHeader)
@@ -87,17 +87,8 @@ module.exports = {
             creator.createdResumes.push(resume);
             await creator.save();
         
-            const theResume = await Resume.findById(id)
-            .populate('education.institution')
-            .populate('education.faculty')
-            .populate('education.course')
-            .populate('education.qualification')
-            .populate('education.level')
-            .populate('certification.title')
-            .populate('certification.issuer')
-            .populate('interest.skill')
-            // return resumes 
-            return theResume;
+            
+            return createdResume;
         } catch(err){
             console.log(err);
             throw err;

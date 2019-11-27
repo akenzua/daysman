@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect} from 'react';
+import React, { createContext} from 'react';
 import {Box, Typography} from '@material-ui/core';
 
 
@@ -8,27 +8,6 @@ export const SummaryContext = createContext();
 
 const SummaryContextProvider = (props) => {
     const classes = useStyles();
-    // const [experience, setSummary] = useState(
-    //  ()=> {
-    //     const localSummary = localStorage.getItem('experience')
-    //     return Summary ? JSON.parse(localSummary): 
-    //     [
-    //         {
-    //             position: "",
-    //             organisation: "",
-    //             start: "",
-    //             end: "",
-    //             job: [
-    //                 {description: ""},
-    //                 {description: ""}
-    //             ]
-    //         }
-    //     ]
-    // })
-
-//   useEffect(() => {
-//     localStorage.setItem('experience', JSON.stringify(experience))
-//   }, [experience])
     
 
     const attributes =  localStorage.getItem('attributes') ? JSON.parse(localStorage.getItem('attributes')): null

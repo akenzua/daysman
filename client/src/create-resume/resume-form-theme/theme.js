@@ -37,13 +37,21 @@ export const useStyles = makeStyles({
       paddingBottom: "35px"
     },
     paper: {
-      padding: "25px",
-      margin: "5px"
+      padding: "20px",
+      margin: "5px",
+      marginBottom: "10px"
     },
     multiple: {
       marginBottom: "13px",
       borderBottom: "1px solid #e4e4e4",
       paddingBottom: "10px"
+    },
+    summary: {
+      padding: "20px",
+      margin: "5px",
+      marginBottom: "10px",
+      paddingTop: "40px",
+      paddingBottom: "40px"
     }
     
   });

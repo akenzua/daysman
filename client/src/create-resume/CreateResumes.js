@@ -31,13 +31,13 @@ const CreateResume = props => {
   
   
     return ( 
-            <div>
+            <Fragment>
               <h2>Create Resume</h2>
               <Route
-                path="/create-resume"
+                path="/create-resume/"
                 render={({ location }) => (
                   <Fragment >
-                    <Tabs value={location.pathname} orientation="vertical" variant="scrollable">
+                    <Tabs value={location.pathname} orientation="horizontal" variant="scrollable">
                       <Tab label="Attributes" value="/create-resume/attributes" component={Link} to="/create-resume/attributes" />
                       <Tab label="Experience" value="/create-resume/experience" component={Link} to="/create-resume/experience" />
                       <Tab value="/create-resume/address" label="Address" component={Link} to="/create-resume/address"/>
@@ -116,7 +116,7 @@ const CreateResume = props => {
           )}
         />
               
-            </div>
+            </Fragment>
     );
     
 }

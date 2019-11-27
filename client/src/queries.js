@@ -11,7 +11,15 @@ export const CREATE_RESUME = gql`
                  address:$address, awards: $awards, education: $education, certification: $certification,
                  interest: $interest
                  ) {
-                  _id title summary
+                  _id
+    }
+  }
+`;
+
+export const RESUME = gql`
+    query resume($id: ID!){
+      resume(id: $id){
+        _id title summary
                   address{
                      _id house street town city country
                      }
@@ -20,10 +28,10 @@ export const CREATE_RESUME = gql`
                     job{ _id description}
                   }
                   awards{
-                    _id  title 
+                    _id title  issuer  expires description
                   }
                   certification {
-                    _id title {_id name}
+                    _id title {_id name} issuer {_id name} expires expiry description
                   }
                   education{
                     _id
@@ -35,7 +43,7 @@ export const CREATE_RESUME = gql`
                   }
                   phone{ number }
                   socials{site account}
+      }
     }
-  }
 `;
 
