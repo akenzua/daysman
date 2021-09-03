@@ -19,7 +19,7 @@
     "apollo-link-http": "^1.5.16",
     "date-fns": "^2.6.0",
     "graphql-tag": "^2.10.1",
-    "immer": "^3.3.0",
+    "immer": "^9.0.6",
     "immutability-helper": "^3.0.1",
     "react": "^16.11.0",
     "react-apollo": "^2.5.8",
